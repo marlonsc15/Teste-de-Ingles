@@ -1,0 +1,19 @@
+.back {
+    background-color: rgb(232, 247, 242);
+    margin: 0;
+    margin-top: 20px;
+    padding-top: 20px;
+    width: 100%;
+    border-radius: 5px;
+    min-height: 40vh;
+}
+
+.container {
+    width: 100%;
+    padding: auto;
+}
+
+.row {
+    padding: 3%;
+}
+
