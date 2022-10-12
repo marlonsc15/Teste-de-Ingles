@@ -1,5 +1,5 @@
 import { Frase } from './../shared/frase.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { FRASES } from './frase-mock'
 
@@ -15,13 +15,16 @@ export class PainelComponent implements OnInit {
   public resposta: string = ''
 
   public rodada: number = 0
-  public rodadaFrase: Frase 
+  public rodadaFrase!: Frase; 
 
   public progresso: number = 0 
 
+  public tentativas: number = 3
+
+  @Output() public encerrarJogo: EventEmitter<string> = new EventEmitter()
+  
   constructor() { 
-    this.rodadaFrase = this.frases[this.rodada]
-    console.log(this.rodadaFrase)
+    this.atualizaRodada()
   }
 
   ngOnInit(): void {
@@ -34,24 +37,38 @@ export class PainelComponent implements OnInit {
   }
 
   public verificarResposta(): void {
-
+    
     if(this.rodadaFrase.frasePtBr == this.resposta) {
-      alert('tradução correta')
     
     //troca de rodada
     this.rodada++
 
     //progresso
     this.progresso = this.progresso + (100 / this.frases.length)
-    console.log(this.progresso)
-    
+
+    if(this.rodada === 4) {
+      this.encerrarJogo.emit('Vitoria')
+    }
 
     //atualiza o objeto rodadaFrase
-    this.rodadaFrase = this.frases[this.rodada]
-
+    this.atualizaRodada()
 
     }else {
-      alert('tradução errada')
+      //diminuir a variavel tentativas
+      this.tentativas--
+
+      if(this.tentativas === -1) {
+        this.encerrarJogo.emit('Derrota')
+      }
     }
+  }
+
+  public atualizaRodada(): void {
+
+    //define a frase da rodada com base em alguma lógica
+    this.rodadaFrase = this.frases[this.rodada]
+
+    //limpar resposta
+    this.resposta = ''
   }
 }

@@ -6,7 +6,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="d-flex justify-content-end">
-                    <app-tentativas></app-tentativas>
+                    <app-tentativas [tentativas]="tentativas" ></app-tentativas>
                 </div>
             </div>
         </div>
@@ -20,6 +20,7 @@
                         class="form-control" 
                         rows="3"
                         (input)="atualizarResposta($event)"
+                        [value]="resposta"
                     ></textarea>
                 </div>
             </div>
