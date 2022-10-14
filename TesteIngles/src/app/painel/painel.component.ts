@@ -1,5 +1,5 @@
 import { Frase } from './../shared/frase.model';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, OnDestroy } from '@angular/core';
 
 import { FRASES } from './frase-mock'
 
@@ -8,7 +8,7 @@ import { FRASES } from './frase-mock'
   templateUrl: './painel.component.html',
   styleUrls: ['./painel.component.css']
 })
-export class PainelComponent implements OnInit {
+export class PainelComponent implements OnInit, OnDestroy {
 
   public instrucao: string = 'Traduza a frase: '
   public frases: Frase[] = FRASES
@@ -30,10 +30,11 @@ export class PainelComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {   
+  }
+
   public atualizarResposta(resposta: Event): void {
     this.resposta =  (<HTMLInputElement>resposta.target).value
-    //console.log(this.resposta);
-    
   }
 
   public verificarResposta(): void {

@@ -13,10 +13,7 @@ export class TentativasComponent implements OnInit, OnChanges {
   public coracoes: Coracao[] = [
     new Coracao(true), new Coracao(true), new Coracao(true)
   ]
-  constructor() { 
-    
-    console.log(this.coracoes);
-  }
+  constructor() { }
 
   ngOnChanges(): void {
 
@@ -25,8 +22,6 @@ export class TentativasComponent implements OnInit, OnChanges {
 
       this.coracoes[indice - 1].cheio = false
     }
-    console.log(`changes ${this.tentativas}`);
-    
   }
 
   ngOnInit() {
